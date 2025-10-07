@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.str-chat__channel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #c9e8c9, #b7e7bb);
+  height: 100%;
+}
+
+.str-chat__container {
+  max-width: 1200px;
+  width: 100%;
+  height: 80% !important;
+  margin: 0 auto !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.str-chat__list {
+  background-color: #ffffff;
+  padding: 12px;
+}
+
+.str-chat__list-notifications {
+  display: none;
+}
+
+.str-chat__message-input {
+  border-top: 1px solid #ddd;
+}
+
+/* TapIn custom components: theme-aware using DaisyUI vars */
+@layer components {
+  .tapin-card {
+    @apply rounded-2xl shadow-xl p-6 border transition-all duration-300;
+    background-color: hsl(var(--b2)); /* base-200 */
+    border-color: hsl(var(--b3));     /* base-300 */
+    color: hsl(var(--bc));            /* base-content */
+  }
+
+  .tapin-heading {
+    @apply font-semibold leading-tight;
+    color: hsl(var(--bc));
+  }
+
+  .tapin-subtle {
+    color: hsl(var(--bc));
+    opacity: 0.7;
+  }
+
+  .tapin-badge-skill-primary {
+    @apply inline-flex items-center px-3 py-1 rounded-full font-medium text-sm;
+    background-color: hsl(var(--p)); /* primary */
+    color: hsl(var(--pc));            /* primary-content */
+  }
+
+  .tapin-badge-skill-secondary {
+    @apply inline-flex items-center px-3 py-1 rounded-full font-medium text-sm;
+    background-color: hsl(var(--s)); /* secondary */
+    color: hsl(var(--sc));
+  }
+
+  .tapin-badge-level {
+    @apply inline-flex items-center px-3 py-1 rounded-full font-medium text-sm border;
+    background-color: transparent;
+    border-color: hsl(var(--b3));
+    color: hsl(var(--bc));
+  }
+
+  .tapin-cta {
+    @apply w-full mt-4 py-3 rounded-xl font-semibold flex items-center justify-center gap-2;
+    background-color: hsl(var(--p));
+    color: hsl(var(--pc));
+  }
+
+  .tapin-cta:hover {
+    background-color: hsl(var(--pf)); /* primary focus */
+  }
+
+  .tapin-cta-disabled {
+    @apply w-full mt-4 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 cursor-not-allowed opacity-60;
+    background-color: hsl(var(--b3));
+    color: hsl(var(--bc));
+  }
+}

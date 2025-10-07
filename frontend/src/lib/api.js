@@ -1,0 +1,97 @@
+import { axiosInstance } from "./axios";
+
+export const signup = async (signupData) => {
+  const response = await axiosInstance.post("/auth/signup", signupData);
+  return response.data;
+};
+
+export const login = async (loginData) => {
+  const response = await axiosInstance.post("/auth/login", loginData);
+  return response.data;
+};
+export const logout = async () => {
+  const response = await axiosInstance.post("/auth/logout");
+  return response.data;
+};
+
+export const getAuthUser = async () => {
+  const { data } = await axiosInstance.get("/auth/me");
+  return data;
+};
+
+export const completeOnboarding = async (userData) => {
+  const response = await axiosInstance.post("/users/onboarding", userData);
+  return response.data;
+};
+
+export async function getUserFriends() {
+  const response = await axiosInstance.get("/users/friends");
+  return response.data;
+}
+
+export async function getRecommendedUsers() {
+  const response = await axiosInstance.get("/users");
+  return response.data;
+}
+
+export async function getOutgoingFriendReqs() {
+  const response = await axiosInstance.get("/users/outgoing-friend-requests");
+  return response.data;
+}
+
+export async function sendFriendRequest(userId) {
+  const response = await axiosInstance.post(`/users/friend-request/${userId}`);
+  return response.data;
+}
+
+export async function getFriendRequests() {
+  const response = await axiosInstance.get("/users/friend-requests");
+  return response.data;
+}
+
+export async function acceptFriendRequest(requestId) {
+  const response = await axiosInstance.put(`/users/friend-request/${requestId}/accept`);
+  return response.data;
+}
+
+export async function rejectFriendRequest(requestId) {
+  const response = await axiosInstance.put(`/users/friend-request/${requestId}/reject`);
+  return response.data;
+}
+
+export const getChatUser = async (userId) => {
+  const response = await axiosInstance.get(`/chat/user/${userId}`);
+  return response.data;
+};
+
+export const getUserProfile = async (id) => {
+  try {
+    const response = await axiosInstance.get(`/users/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("getUserProfile - Error fetching profile:", error.response?.status, error.response?.data);
+    throw error; // Re-throw to be caught by React Query
+  }
+};
+
+export const updateUserProfile = async (profileData) => {
+  const response = await axiosInstance.put("/users/profile", profileData);
+  return response.data;
+};
+
+export const uploadProfilePicture = async (file) => {
+  const formData = new FormData();
+  formData.append("profilePicture", file);
+  
+  const response = await axiosInstance.post("/users/profile/upload-picture", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return response.data;
+};
+
+export const searchUsersBySkill = async (query) => {
+  const response = await axiosInstance.get(`/users/search/skills?query=${query}`);
+  return response.data;
+};
